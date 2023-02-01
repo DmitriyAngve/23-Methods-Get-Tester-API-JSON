@@ -2,6 +2,9 @@ const btn = document.querySelector(".btn");
 const inpEle = document.querySelector("input");
 const output = document.querySelector(".output");
 
+const myForm = document.createElement("form");
+document.body.append(myForm);
+
 const output1 = document.createElement("div");
 output1.classList.add("main");
 const baseUrl =
@@ -13,7 +16,7 @@ const baseUrl =
 inpEle.classList.add("box");
 inpEle.setAttribute("name", "nameOG");
 inpEle.value = "Hello World";
-output.append(inpEle);
+myForm.append(inpEle);
 
 for (let i = 0; i < 10; i++) {
   const myInput = document.createElement("input");
@@ -22,10 +25,10 @@ for (let i = 0; i < 10; i++) {
   myInput.classList.add("box");
   myInput.setAttribute("name", "name" + (i + 1));
   myInput.value = "Value " + i;
-  output.append(myInput);
+  myForm.append(myInput);
 }
 
-output.append(btn);
+myForm.append(btn);
 output.append(output1);
 btn.classList.add("box");
 
