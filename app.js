@@ -29,7 +29,17 @@ btn.addEventListener("click", loadData);
 
 function loadData() {
   console.log("ready");
-  const url = baseUrl + "?id=100&pg=1";
+  let url = baseUrl + "?";
+  const eles = output.querySelectorAll("input");
+  // Create temporary array for delete first blank string
+
+  eles.forEach((el) => {
+    console.log(el.name);
+    // Append it to the URL
+    let temp = `${el.name}=${el.value}&`; // it's going construct our Web URL
+    url += temp;
+  });
+  console.log(url);
   getData(url);
 }
 
