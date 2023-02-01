@@ -1,6 +1,8 @@
 const btn = document.querySelector(".btn");
 const inpEle = document.querySelector("input");
 const output = document.querySelector(".output");
+const output1 = document.createElement("div");
+output1.classList.add("main");
 const baseUrl =
   "https://script.google.com/macros/s/AKfycbzUcUVn99AkTK1rxxjCd-oU_707N3s23p9OriMaMzCYunuacydj/exec";
 
@@ -8,7 +10,7 @@ const baseUrl =
 // window.addEventListener("DOMContentLoaded", loadData);
 
 inpEle.classList.add("box");
-inpEle.setAttribute("name", "nameOG"); // OG - OriGinal
+inpEle.setAttribute("name", "nameOG");
 inpEle.value = "Hello World";
 output.append(inpEle);
 
@@ -23,6 +25,7 @@ for (let i = 0; i < 10; i++) {
 }
 
 output.append(btn);
+output.append(output1);
 btn.classList.add("box");
 
 btn.addEventListener("click", loadData);
@@ -31,14 +34,20 @@ function loadData() {
   console.log("ready");
   let url = baseUrl + "?";
   const eles = output.querySelectorAll("input");
+
   // Create temporary array for delete first blank string
+  let tempArr = [];
 
   eles.forEach((el) => {
     console.log(el.name);
     // Append it to the URL
-    let temp = `${el.name}=${el.value}&`; // it's going construct our Web URL
-    url += temp;
+    let temp = `${el.name}=${el.value}`; // it's going construct our Web URL
+    // Populate blank array
+    tempArr.push(temp);
   });
+  // Build Web URL
+  let reqUrl = tempArr.join("&"); // join together with separator
+  url += reqUrl;
   console.log(url);
   getData(url);
 }
@@ -48,6 +57,14 @@ function getData(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      outputObj(data);
     });
+}
+
+// Iterate JSON data (Generate the page)
+function outputObj(obj) {
+  output1.innerHTML = "";
+  for (const prop in obj) {
+    output1.innerHTML += `${prop} : ${obj[prop]}<br>`;
+  }
 }

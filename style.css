@@ -9,3 +9,12 @@ h1 {
   width: 80%;
   font-size: 1.2em;
 }
+
+.main {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  font-size: 0.8em;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
